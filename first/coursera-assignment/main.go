@@ -56,8 +56,8 @@ func appendName(first, last string) {
 NOTES:
 
 A Race Condition is encountered with both function invocations:
-	➡ appendName("Godson", "Sena"), say Goroutine A
-	➡ appendName("Gyen", "Abubakar"), say Goroutine B
+	➡ appendName("Godson", "Sena")
+	➡ appendName("Gyen", "Abubakar")
 
 Each Goroutine reads from the variable fullName, and then writes to it. Hence, there's a communication.
 But, is it synchronised? 🤔
