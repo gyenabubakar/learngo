@@ -64,7 +64,7 @@ But, is it synchronised? 🤔
 
 Each Goroutine makes a copy of the shared resource, fullName.
 
-This, "copy" is now updated depending on its current value - empty or not.
+This "copy" is now updated depending on its current value - empty or not.
 Regardless, there's an assignment; the copy no longer has the previous state of fullName.
 
 Before there's a write to the fullName variable, the current Goroutine
