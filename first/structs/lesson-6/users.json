@@ -1,0 +1,23 @@
+[
+   {
+      "username": "Gyen Abubakar",
+      "perms": {
+         "admin": true,
+         "premium": false
+      }
+   },
+   {
+      "username": "Sena Godson",
+      "perms": {
+         "admin": false,
+         "premium": true
+      }
+   },
+   {
+      "username": "DeGraft Arthur",
+      "perms": {
+         "admin": true,
+         "premium": true
+      }
+   }
+]

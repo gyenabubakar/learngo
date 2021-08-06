@@ -1,0 +1,6 @@
+google.com 10
+wa-artisan.com 3
+youtube.com 24
+google.com 11
+w3schools.com 7
+youtube.com 2
