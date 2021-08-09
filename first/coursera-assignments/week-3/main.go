@@ -62,7 +62,7 @@ func getUserNumbers() ([][]int, error) {
 		return nil, err
 	}
 
-	r, _ := regexp.Compile("([0-9]{1,2},){11}([0-9]{1,2}){1}")
+	r, _ := regexp.Compile("([0-9]{1,2},){11}([0-9]{1,2})")
 
 	if r.MatchString(input) {
 		// convert string to rune slice
