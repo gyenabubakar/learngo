@@ -14,6 +14,8 @@ var (
 
 	// wg is used to wait for the program to finish.
 	wg sync.WaitGroup
+
+	mtx sync.Mutex
 )
 
 // main is the entry point for all Go programs.
@@ -36,16 +38,20 @@ func incCounter() {
 	defer wg.Done()
 
 	for count := 0; count < 2; count++ {
-		// Capture the value of Counter.
-		value := counter
+		mtx.Lock()
+		{
+			// Capture the value of Counter.
+			value := counter
 
-		// Yield the thread and be placed back in queue.
-		runtime.Gosched()
+			// Yield the thread and be placed back in queue.
+			runtime.Gosched()
 
-		// Increment our local value of Counter.
-		value++
+			// Increment our local value of Counter.
+			value++
 
-		// Store the value back into Counter.
-		counter = value
+			// Store the value back into Counter.
+			counter = value
+		}
+		mtx.Unlock()
 	}
 }
