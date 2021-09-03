@@ -2,15 +2,29 @@ package main
 
 import "fmt"
 
-const engGreeting = "Hello "
-
-func main() {
-	fmt.Println(Hello("Gyen"))
+var langPrefixes = map[string]string{
+	"Spanish": "Hola ",
+	"French":  "Bonjour ",
+	"English": "Hello ",
 }
 
-func Hello(name string) string {
-	if name ==  "" {
-		return engGreeting + "World!"
+func main() {
+	fmt.Println(Hello("Gyen", "Spanish"))
+}
+
+func Hello(name string, lang string) string {
+	if name == "" {
+		name = "World"
 	}
-	return engGreeting + name + "!"
+
+	return getPrefixOf(lang) + name + "!"
+}
+
+func getPrefixOf(lang string) (prefix string) {
+	prefix = langPrefixes[lang]
+	if prefix == "" {
+		prefix = langPrefixes["English"]
+	}
+
+	return
 }
