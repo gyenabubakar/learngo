@@ -9,5 +9,8 @@ func main() {
 }
 
 func Hello(name string) string {
+	if name ==  "" {
+		return engGreeting + "World!"
+	}
 	return engGreeting + name + "!"
 }

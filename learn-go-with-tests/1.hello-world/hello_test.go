@@ -3,10 +3,21 @@ package main
 import "testing"
 
 func TestHello(t *testing.T) {
-	got := Hello("Gyen")
-	wanted := "Hello Gyen!"
+	t.Run("return 'Hello NAME!' when called with none-empty string", func(t *testing.T) {
+		actual := Hello("Gyen")
+		expected := "Hello Gyen!"
 
-	if got != wanted {
-		t.Errorf("got %q; wanted %q\n", got, wanted)
-	}
+		if actual != expected {
+			t.Errorf("Expected %q. Received %q.\n", expected, actual)
+		}
+	})
+
+	t.Run("return 'Hello World!' if called with empty string", func(t *testing.T) {
+		actual := Hello("")
+		expected := "Hello World!"
+
+		if actual != expected {
+			t.Errorf("Expected %q. Received %q.\n", expected, actual)
+		}
+	})
 }
