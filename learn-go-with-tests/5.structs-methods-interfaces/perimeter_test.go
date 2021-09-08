@@ -3,7 +3,8 @@ package measurement
 import "testing"
 
 func TestPerimeter(t *testing.T) {
-	a := Perimeter(10.0, 10.0)
+	r := Rectangle{Width: 10, Height: 10}
+	a := Perimeter(r)
 	e := 40.0
 
 	if a != e {

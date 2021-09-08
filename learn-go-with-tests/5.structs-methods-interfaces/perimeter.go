@@ -1,5 +1,5 @@
 package measurement
 
-func Perimeter(w, h float64) float64 {
-	return (w + h) * 2
+func Perimeter(r Rectangle) float64 {
+	return (r.Width + r.Height) * 2
 }

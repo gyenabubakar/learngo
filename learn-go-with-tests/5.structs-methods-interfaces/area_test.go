@@ -3,7 +3,8 @@ package measurement
 import "testing"
 
 func TestArea(t *testing.T) {
-	a := Area(10, 10)
+	r := Rectangle{10, 10}
+	a := Area(r)
 	e := 100.0
 
 	if a != e {
