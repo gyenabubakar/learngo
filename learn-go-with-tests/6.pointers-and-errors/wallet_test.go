@@ -5,11 +5,19 @@ import (
 )
 
 func TestWallet(t *testing.T) {
-	assert := func(tb testing.TB, expected, actual Bitcoin) {
+	assertBalance := func(tb testing.TB, expected, actual Bitcoin) {
 		tb.Helper()
 
 		if expected != actual {
 			tb.Errorf("Expected %s. Received %s.", expected, actual)
+		}
+	}
+
+	assertError := func(tb testing.TB, err error) {
+		tb.Helper()
+
+		if err == nil {
+			t.Errorf("Didn't get an expected error.")
 		}
 	}
 
@@ -21,15 +29,24 @@ func TestWallet(t *testing.T) {
 		expected := Bitcoin(20)
 		actual := wallet.Balance()
 
-		assert(t, expected, actual)
+		assertBalance(t, expected, actual)
 	})
 
 	t.Run("Withdraw", func(t *testing.T) {
-		wallet.Withdraw(10)
+		err := wallet.Withdraw(10)
 
 		expected := Bitcoin(10)
 		actual := wallet.Balance()
 
-		assert(t, expected, actual)
+		assertBalance(t, expected, actual)
+		assertError(t, err)
+	})
+
+	t.Run("Throw error on insufficient funds", func(t *testing.T) {
+		// at this point, balance is 10 BTC, so withdrawing 20 BTC
+		// should return an error
+		err := wallet.Withdraw(20)
+
+		assertError(t, err)
 	})
 }
