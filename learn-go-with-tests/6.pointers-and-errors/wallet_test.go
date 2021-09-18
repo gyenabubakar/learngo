@@ -13,6 +13,6 @@ func TestWallet(t *testing.T) {
 	actual := wallet.Balance()
 
 	if expected != actual {
-		t.Errorf("Expected %d. Received %d.", expected, actual)
+		t.Errorf("Expected %s. Received %s.", expected, actual)
 	}
 }
