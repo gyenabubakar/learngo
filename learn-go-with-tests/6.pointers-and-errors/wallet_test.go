@@ -5,22 +5,6 @@ import (
 )
 
 func TestWallet(t *testing.T) {
-	assertBalance := func(tb testing.TB, expected, actual Bitcoin) {
-		tb.Helper()
-
-		if expected != actual {
-			tb.Errorf("Expected %s. Received %s.", expected, actual)
-		}
-	}
-
-	assertError := func(tb testing.TB, err error) {
-		tb.Helper()
-
-		if err == nil {
-			t.Errorf("Didn't get an expected error.")
-		}
-	}
-
 	wallet := Wallet{}
 
 	t.Run("Deposit", func(t *testing.T) {
@@ -38,8 +22,8 @@ func TestWallet(t *testing.T) {
 		expected := Bitcoin(10)
 		actual := wallet.Balance()
 
+		assertNoError(t, err)
 		assertBalance(t, expected, actual)
-		assertError(t, err)
 	})
 
 	t.Run("Throw error on insufficient funds", func(t *testing.T) {
@@ -47,6 +31,34 @@ func TestWallet(t *testing.T) {
 		// should return an error
 		err := wallet.Withdraw(20)
 
-		assertError(t, err)
+		assertError(t, err, InsufficientBalanceError)
 	})
+}
+
+func assertBalance(tb testing.TB, expected, actual Bitcoin) {
+	tb.Helper()
+
+	if expected != actual {
+		tb.Errorf("Expected %s. Received %s.", expected, actual)
+	}
+}
+
+func assertError(tb testing.TB, err error, expectedErrorMessage string) {
+	tb.Helper()
+
+	if err == nil {
+		tb.Fatal("Didn't get an expected error.")
+	}
+
+	if err.Error() != expectedErrorMessage {
+		tb.Errorf("Expected %q. Received %q.\n", expectedErrorMessage, err.Error())
+	}
+}
+
+func assertNoError(tb testing.TB, err error) {
+	tb.Helper()
+
+	if err != nil {
+		tb.Errorf("There's an unchecked error.")
+	}
 }
